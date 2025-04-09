@@ -1,0 +1,84 @@
+{load_file("nrngui.hoc")}
+objectvar save_window_, rvp_
+objectvar scene_vector_[7]
+objectvar ocbox_, ocbox_list_, scene_, scene_list_
+{ocbox_list_ = new List()  scene_list_ = new List()}
+{pwman_place(0,0,0)}
+{
+save_window_ = new Graph(0)
+save_window_.size(0,6200,-50,50)
+scene_vector_[2] = save_window_
+{save_window_.view(0, -50, 6200, 100, 346, 0, 935.04, 164.8)}
+graphList[0].append(save_window_)
+save_window_.save_name("graphList[0].")
+save_window_.addvar("_pysec.model.V1_brain( 0.5 )", 3, 3, 0.701082, 1.03742, 2)
+save_window_.addvar("_pysec.model.V2_brain( 0.5 )", 2, 9, 0.699536, 1.02705, 2)
+}
+{
+xpanel("RunControl", 0)
+v_init = -65
+xvalue("Init","v_init", 1,"stdinit()", 1, 1 )
+xbutton("Init & Run","run()")
+xbutton("Stop","stoprun=1")
+runStopAt = 5
+xvalue("Continue til","runStopAt", 1,"{continuerun(runStopAt) stoprun=1}", 1, 1 )
+runStopIn = 1
+xvalue("Continue for","runStopIn", 1,"{continuerun(t + runStopIn) stoprun=1}", 1, 1 )
+xbutton("Single Step","steprun()")
+t = 6110.77
+xvalue("t","t", 2 )
+tstop = 6109.2
+xvalue("Tstop","tstop", 1,"tstop_changed()", 0, 1 )
+dt = 2.92156
+xvalue("dt","dt", 1,"setdt()", 0, 1 )
+steps_per_ms = 40
+xvalue("Points plotted/ms","steps_per_ms", 1,"setdt()", 0, 1 )
+screen_update_invl = 0.05
+xvalue("Scrn update invl","screen_update_invl", 1,"", 0, 1 )
+realtime = 13.06
+xvalue("Real Time","realtime", 0,"", 0, 1 )
+xpanel(-1,76)
+}
+{
+save_window_ = new Graph(0)
+save_window_.size(0,6200,-0.01,1)
+scene_vector_[3] = save_window_
+{save_window_.view(0, -0.01, 6200, 1.01, 351, 229, 935.04, 147.52)}
+graphList[0].append(save_window_)
+save_window_.save_name("graphList[0].")
+save_window_.addvar("_pysec.model.A1_body( 0.5 )", 3, 6, 0.663398, 1.03169, 2)
+save_window_.addexpr("_pysec.model.A2_body( 0.5 )", 2, 1, 0.665149, 1.03433, 2)
+}
+{
+save_window_ = new Graph(0)
+save_window_.size(0,6200,0,1)
+scene_vector_[4] = save_window_
+{save_window_.view(0, 0, 6200, 1, 344, 427, 947.52, 179.2)}
+graphList[0].append(save_window_)
+save_window_.save_name("graphList[0].")
+save_window_.addvar("_pysec.model.N1_brain( 0.5 )", 6, 3, 0.616884, 1.09419, 2)
+save_window_.addexpr("_pysec.model.N2_brain( 0.5 )", 4, 1, 0.616578, 1.094, 2)
+}
+{
+save_window_ = new Graph(0)
+save_window_.size(0,6200,-2.5,3)
+scene_vector_[5] = save_window_
+{save_window_.view(0, -2.5, 6200, 5.5, 342, 670, 954.24, 157.12)}
+graphList[0].append(save_window_)
+save_window_.save_name("graphList[0].")
+save_window_.addexpr("_pysec.model.x_body( 0.5 )", 1, 4, 0.627895, 0.203702, 2)
+}
+
+//Begin Movie Run
+{
+movie_frame_dur_ = 0.01
+
+movierunpanel(0)
+ocbox_ = movierunbox
+ocbox_.map("Movie Run", -3, 477, 327.36, 89.28)
+}
+objref ocbox_
+//End Movie Run
+
+objectvar scene_vector_[1]
+{doNotify()}
