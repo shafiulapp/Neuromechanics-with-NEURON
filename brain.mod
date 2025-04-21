@@ -23,7 +23,7 @@ PARAMETER {
     Eslope = 2
     phi = 0.0005
     Esyn = -80
-    gsyn = 0.005     : updated synaptic conductance for CPG
+    gsyn = 0.005     
     Ethresh = 15
     : Feedback parameters
     gfb = 0.001
@@ -56,7 +56,7 @@ BREAKPOINT {
 }
 
 DERIVATIVE states {
-    : Compute activation and inactivation functions for the CPG
+    : Activation and inactivation functions for the CPG
     minf1 = 0.5*(1 + tanh((V1 - E1)/E2))
     minf2 = 0.5*(1 + tanh((V2 - E1)/E2))
     winf1 = 0.5*(1 + tanh((V1 - E3)/E4))
@@ -72,7 +72,7 @@ DERIVATIVE states {
     sinffb1 = 0.5*(1 - tanh((L1Pointer - L0)/Lslope))
     sinffb2 = 0.5*(1 - tanh((L2Pointer - L0)/Lslope))
     
-    : Synaptic currents (chemical synapses and feedback)
+    : Synaptic currents (inhibitory synapses and feedback)
     Isyn1 = gsyn * sinffw2 * (V1 - Esyn)
     Isyn2 = gsyn * sinffw1 * (V2 - Esyn)
     Ifb1  = gfb * sinffb2 * (V1 - Efb)
