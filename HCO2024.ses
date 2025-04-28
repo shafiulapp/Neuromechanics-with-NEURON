@@ -1,6 +1,6 @@
 {load_file("nrngui.hoc")}
 objectvar save_window_, rvp_
-objectvar scene_vector_[7]
+objectvar scene_vector_[6]
 objectvar ocbox_, ocbox_list_, scene_, scene_list_
 {ocbox_list_ = new List()  scene_list_ = new List()}
 {pwman_place(0,0,0)}
@@ -25,19 +25,19 @@ xvalue("Continue til","runStopAt", 1,"{continuerun(runStopAt) stoprun=1}", 1, 1 
 runStopIn = 1
 xvalue("Continue for","runStopIn", 1,"{continuerun(t + runStopIn) stoprun=1}", 1, 1 )
 xbutton("Single Step","steprun()")
-t = 6110.77
+t = 6109.2
 xvalue("t","t", 2 )
 tstop = 6109.2
 xvalue("Tstop","tstop", 1,"tstop_changed()", 0, 1 )
-dt = 2.92156
+dt = 0.001
 xvalue("dt","dt", 1,"setdt()", 0, 1 )
 steps_per_ms = 40
 xvalue("Points plotted/ms","steps_per_ms", 1,"setdt()", 0, 1 )
 screen_update_invl = 0.05
 xvalue("Scrn update invl","screen_update_invl", 1,"", 0, 1 )
-realtime = 13.06
+realtime = 12.18
 xvalue("Real Time","realtime", 0,"", 0, 1 )
-xpanel(-1,76)
+xpanel(10,106)
 }
 {
 save_window_ = new Graph(0)
@@ -61,24 +61,29 @@ save_window_.addexpr("_pysec.model.N2_brain( 0.5 )", 4, 1, 0.616578, 1.094, 2)
 }
 {
 save_window_ = new Graph(0)
-save_window_.size(0,6200,-2.5,3)
+save_window_.size(0,6200,-1.2,2.7)
 scene_vector_[5] = save_window_
-{save_window_.view(0, -2.5, 6200, 5.5, 342, 670, 954.24, 157.12)}
+{save_window_.view(0, -1.2, 6200, 3.9, 342, 670, 954.24, 157.12)}
 graphList[0].append(save_window_)
 save_window_.save_name("graphList[0].")
 save_window_.addexpr("_pysec.model.x_body( 0.5 )", 1, 4, 0.627895, 0.203702, 2)
 }
 
-//Begin Movie Run
+//Begin VariableTimeStep
 {
-movie_frame_dur_ = 0.01
-
-movierunpanel(0)
-ocbox_ = movierunbox
-ocbox_.map("Movie Run", -3, 477, 327.36, 89.28)
+ocbox_ = NumericalMethodPanel[0]
+}
+{object_push(ocbox_)}
+{
+atol_ = 0.0001  CVode[0].atol(atol_)
+restore(1, 1)
+}
+{object_pop()}
+{
+ocbox_.map("VariableTimeStep", 2, 627, 272.64, 113.28)
 }
 objref ocbox_
-//End Movie Run
+//End VariableTimeStep
 
 objectvar scene_vector_[1]
 {doNotify()}
