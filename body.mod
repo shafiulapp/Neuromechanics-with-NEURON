@@ -1,3 +1,4 @@
+
 NEURON {
     SUFFIX body
     POINTER V1Pointer, V2Pointer
@@ -26,7 +27,7 @@ ASSIGNED {
 STATE { A1 A2 x y1 }
 
 INITIAL {
- A1 = 0.0000
+ A1 = 0.0001
  A2 = 0.5349
  x = 2.6749
  y1 = 0
@@ -54,8 +55,8 @@ DERIVATIVE states {
     U2 = (1.03 - 4.31 * exp(-0.198 * u2)) * (u2 >= 8)
     
    
-    LT1 = -3 * sqrt(3) * (L1 - 1) * (L1 - 5) * (L1 - 15) * (L1 <= 15) * (L1 >= 5) / (2 * 625)
-    LT2 = -3 * sqrt(3) * (L2 - 1) * (L2 - 5) * (L2 - 15) * (L2 <= 15) * (L2 >= 5) / (2 * 625)
+    LT1 = -3 * sqrt(3) * (L1 - 1) * (L1 - 5) * (L1 - 15)* (L1 <= 15) * (L1 >= 5) / (2 * 625)
+    LT2 = -3 * sqrt(3) * (L2 - 1) * (L2 - 5) * (L2 - 15)* (L2 <= 15) * (L2 >= 5) / (2 * 625)
    
     a1 = g * (A1 - a0)
     a2 = g * (A2 - a0)
@@ -66,7 +67,7 @@ DERIVATIVE states {
     
     A1' = (1/tau) * ( U1 - (beta + (1 - beta)*U1)*A1 )
     A2' = (1/tau) * ( U2 - (beta + (1 - beta)*U2)*A2 )
-    x' = (1/b) * (F2 - F1 + kappa * F_ell)
+    x' = (1/b) * (F2 - F1 + r*kappa * F_ell)
     
     y1' = - r * x'
 }
