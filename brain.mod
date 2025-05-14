@@ -1,8 +1,9 @@
-TITLE Brain module for CPG dynamics with feedback
+
 
 NEURON {
     SUFFIX brain
     POINTER L1Pointer, L2Pointer
+    RANGE gfb,gsyn
 }
 
 
@@ -23,10 +24,10 @@ PARAMETER {
     Eslope = 2
     phi = 0.0005
     Esyn = -80
-    gsyn = 0.005     
+    gsyn = 0.005     : updated synaptic conductance for CPG
     Ethresh = 15
     : Feedback parameters
-    gfb = 0.001
+    gfb = 0.001  
     Efb = -80
 
     L0 = 10
@@ -56,7 +57,7 @@ BREAKPOINT {
 }
 
 DERIVATIVE states {
-    : Activation and inactivation functions for the CPG
+    : Compute activation and inactivation functions for the CPG
     minf1 = 0.5*(1 + tanh((V1 - E1)/E2))
     minf2 = 0.5*(1 + tanh((V2 - E1)/E2))
     winf1 = 0.5*(1 + tanh((V1 - E3)/E4))
@@ -72,7 +73,7 @@ DERIVATIVE states {
     sinffb1 = 0.5*(1 - tanh((L1Pointer - L0)/Lslope))
     sinffb2 = 0.5*(1 - tanh((L2Pointer - L0)/Lslope))
     
-    : Synaptic currents (inhibitory synapses and feedback)
+    : Synaptic currents (chemical synapses and feedback)
     Isyn1 = gsyn * sinffw2 * (V1 - Esyn)
     Isyn2 = gsyn * sinffw1 * (V2 - Esyn)
     Ifb1  = gfb * sinffb2 * (V1 - Efb)

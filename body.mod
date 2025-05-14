@@ -15,6 +15,7 @@ PARAMETER {
  F_ell = 2     
  kappa = 1      
  Ethresh = 15     : threshold used to conditionally apply extra load
+T = 3055
 }
 
 ASSIGNED {
@@ -24,13 +25,13 @@ ASSIGNED {
  r
 }
 
-STATE { A1 A2 x q }
+STATE { A1 A2 x Q}
 
 INITIAL {
  A1 = 0
  A2 = 0.5349
  x = 2.6749
- q = 0
+ Q = 0
 }
 
 BREAKPOINT {
@@ -69,5 +70,5 @@ DERIVATIVE states {
     A2' = (1/tau) * ( U2 - (beta + (1 - beta)*U2)*A2 )
     x' = (1/b) * (F2 - F1 + r*kappa * F_ell)
     
-    q' = - r * x'
+    Q' = - r * x'
 }
