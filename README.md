@@ -1,7 +1,8 @@
 #Read the instructions for using the codes
 
 
-For reproducing the HCO model's typical solution from the paper "", first compile body.mod and brain.mod files , then using python code trialf.ipynb , one can reproduce the solutions. Even by loading HCO2024.ses in NEURON GUI one can also visualize the same solution.
+For reproducing the HCO model's typical solution from the paper "Zhuojun Yu and Peter J Thomas. Variational analysis of sensory feedback mechanisms
+in powerstroke{recovery systems. Biological Cybernetics, 118(5):277{309, 2024.", first compile body.mod and brain.mod files , then using python code trialf.ipynb , one can reproduce the solutions. Even by loading HCO2024.ses in NEURON GUI one can also visualize the same solution.
 
 
 
